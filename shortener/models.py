@@ -1,6 +1,10 @@
-
+from django.conf import settings
 from .utils import code_generator, create_shortcode
 from django.db import models
+
+
+SHORTCODE_MAX = getattr(settings, 'SHORTCODE_MAX', 15)
+
 
 # Create your models here.
 class KirrURLManager(models.Manager):
@@ -14,7 +18,7 @@ class KirrURLManager(models.Manager):
         
         if items is not None and isinstance(items,int):
             qs = qs.order_by('-id')[:items]
-            
+
         new_codes = 0 
         for q in qs:
             q.shortcode = create_shortcode(q)
@@ -25,7 +29,7 @@ class KirrURLManager(models.Manager):
 ### This model is the blueprint to save urls
 class KirrURL(models.Model):
     url = models.CharField(max_length=220,)
-    shortcode = models.CharField(max_length=15,unique=True, blank= True)
+    shortcode = models.CharField(max_length=SHORTCODE_MAX,unique=True, blank= True)
     updated = models.DateTimeField(auto_now=True) #every time is saved
     timestamp = models.DateTimeField(auto_now_add=True) #when model was created
     active = models.BooleanField(default=True)
