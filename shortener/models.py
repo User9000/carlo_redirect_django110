@@ -2,7 +2,7 @@ from django.conf import settings
 from .utils import code_generator, create_shortcode
 from django.db import models
 
-
+##shortcode max variable
 SHORTCODE_MAX = getattr(settings, 'SHORTCODE_MAX', 15)
 
 

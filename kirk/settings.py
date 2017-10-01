@@ -25,7 +25,7 @@ SECRET_KEY = 'l2#06e$g987gs#fbp^=-!90@#hd%y(43a=263i*w*mjznouu%s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.carlolam.com','carlolam.com']
 
 
 # Application definition
@@ -37,11 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Third party apps
+    'django_hosts',
     # CUSTOM APP - CARLO
     'shortener',
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,10 +53,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'kirk.urls'
-
+ROOT_HOSTCONF = 'kirk.hosts'
+DEFAULT_HOST='www'
+DEFAULT_REDIRECT_URL = "http://www.carlolam.com:8000"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -121,5 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SHORTCODE_MAX = 10
-SHORTCODE_MIN = 4
+
+#Custom Variables - shortener app
+SHORTCODE_MAX = 15
+SHORTCODE_MIN = 6

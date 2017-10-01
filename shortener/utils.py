@@ -2,6 +2,8 @@
 from django.conf import settings
 import random
 import string
+
+#shortcode min variable
 SHORTCODE_MIN = getattr(settings, 'SHORTCODE_MIN', 6)
 
 ### Code generator is used to generate a random code to identify the url
