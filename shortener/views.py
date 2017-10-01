@@ -9,6 +9,8 @@ class HomeView(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, "shortener/home.html", {})
+    def post(self, request, *args, **kwargs):
+        return render(request, "shortener/home.html", {})
 
 #class based view
 class KirrCBView(View):
