@@ -3,14 +3,30 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 # Create your views here.
 from .models import KirrURL
+from .forms import SubmitUrlForm
 #function based view
 
 class HomeView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, "shortener/home.html", {})
+        the_form = SubmitUrlForm()
+        context = {
+            "title": "carlo lam",
+            "form": the_form
+        }
+
+        return render(request, "shortener/home.html", context)
     def post(self, request, *args, **kwargs):
-        return render(request, "shortener/home.html", {})
+
+        form = SubmitUrlForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+        context = {
+            "title": "carlo lam",
+            "form": form,
+        
+        }
+        return render(request, "shortener/home.html", context)
 
 #class based view
 class KirrCBView(View):
