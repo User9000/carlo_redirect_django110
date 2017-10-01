@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     #Third party apps
     'django_hosts',
     # CUSTOM APP - CARLO
+    'analytics',
     'shortener',
+    
 ]
 
 MIDDLEWARE = [
@@ -60,6 +62,8 @@ ROOT_URLCONF = 'kirk.urls'
 ROOT_HOSTCONF = 'kirk.hosts'
 DEFAULT_HOST='www'
 DEFAULT_REDIRECT_URL = "http://www.carlolam.com:8000"
+PARENT_HOST ="carlolam.com"
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

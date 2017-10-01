@@ -2,6 +2,8 @@ from django.conf import settings
 from .utils import code_generator, create_shortcode
 from django.db import models
 
+from django.core.urlresolvers import reverse
+from django_hosts.resolvers import reverse
 ##shortcode max variable
 SHORTCODE_MAX = getattr(settings, 'SHORTCODE_MAX', 15)
 
@@ -44,4 +46,8 @@ class KirrURL(models.Model):
         return str(self.url)
 
     def __unicode__(self):
-        return str(self.url)    
+        return str(self.url)
+
+    def get_short_url (self):
+        url_path = reverse("scode", kwargs={"shortcode": self.shortcode}, host= 'www', scheme='http', port='8000')
+        return url_path
