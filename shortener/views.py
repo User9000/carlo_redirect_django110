@@ -26,6 +26,7 @@ class HomeView(View):
             "form": form,
         
         }
+        template = "shortener/home.html"
         if form.is_valid():
             print(form.cleaned_data)
             new_url = form.cleaned_data.get("url")
@@ -52,7 +53,7 @@ class URLRedirectView(View):
         return HttpResponseRedirect(obj.url)
   
         
-       
+  
         
 
 
@@ -61,8 +62,6 @@ class URLRedirectView(View):
 
 
 '''
-
-
 #function based handles by default GET/POST/DELETE/HEAD
 def kirr_redirect_view(request, shortcode=None, *args, **kwargs):
 

@@ -11,7 +11,7 @@ def code_generator( size = SHORTCODE_MIN,chars=string.ascii_lowercase + string.d
     return ''.join(random.choice(chars) for _ in range(size))
 
 ### create_shortcode is used to check if the shortcode already exists
-def create_shortcode(instance , size =6):
+def create_shortcode(instance , size=6):
     new_code = code_generator(size=size)
     KirrURL = instance.__class__
     qs_exists = KirrURL.objects.filter(shortcode = new_code)
