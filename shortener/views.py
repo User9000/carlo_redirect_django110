@@ -27,10 +27,14 @@ class HomeView(View):
         
         }
         template = "shortener/home.html"
+        #print("this is the url from form after validators", form.url)
         if form.is_valid():
-            print(form.cleaned_data)
+            #print("this is the url got from the form",form.cleaned_data.get("url"))
             new_url = form.cleaned_data.get("url")
+            #print(" url going directly to get_or_create", new_url)
             obj, created = KirrURL.objects.get_or_create(url=new_url)
+            #print("this is the object ", obj)
+            #print("is creaed? ", created)
             context = {
                 "object": obj,
                 "created": created,

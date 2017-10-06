@@ -31,7 +31,7 @@ class KirrURLManager(models.Manager):
 
 ### This model is the blueprint to save urls
 class KirrURL(models.Model):
-    url = models.CharField(max_length=220, validators=[validate_url,validate_dot_com])
+    url = models.CharField(max_length=220, validators=[validate_url])
     shortcode = models.CharField(max_length=SHORTCODE_MAX,unique=True, blank= True)
     updated = models.DateTimeField(auto_now=True) #every time is saved
     timestamp = models.DateTimeField(auto_now_add=True) #when model was created
@@ -41,6 +41,9 @@ class KirrURL(models.Model):
     def save(self, *args, **kwargs):
         if self.shortcode is None or self.shortcode == '':
             self.shortcode =  create_shortcode(self)
+        if not "http" in self.url:
+            self.url = "http://" + self.url
+            #print("this is the saved url: ",self.url)
         super(KirrURL,self).save(*args,**kwargs)
 
     def __str__(self): 

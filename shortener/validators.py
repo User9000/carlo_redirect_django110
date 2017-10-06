@@ -3,15 +3,19 @@ from django import forms
 
 def validate_url(value):
     url_validator = URLValidator()
-    if not "https" or not "http" in value:
-        value = "https://" + value
+
+    reg_value = value
+    if "http" in reg_value:
+        new_value = reg_value
+    else:
+        new_value = "http://" + reg_value
 
     try:
-        url_validator(value)
+        url_validator(new_value)
     except:
         raise ValidationError("Wrong URL")
-    print(value)
-    return value
+    #print(new_value)
+    return new_value
 def validate_dot_com(value):
     
         if not "com" in value:
